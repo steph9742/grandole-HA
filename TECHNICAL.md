@@ -60,7 +60,7 @@ custom_components/grandole/
 ├── services.yaml          Sélecteurs des services
 ├── strings.json           Textes (français)
 ├── translations/fr.json, en.json
-├── manifest.json          requirements: gtfs-realtime-bindings
+├── manifest.json          requirements: gtfs-realtime-bindings==2.2.0
 ├── brand/icon.png, icon@2x.png
 └── lovelace/
     ├── grandole-card.js         4 custom elements
@@ -571,11 +571,13 @@ Déchargement
 | Messages | Infotrafic éditorial (HTML) | Infotrafic du site officiel (HTML nettoyé) plus messages synthétisés à partir du temps réel |
 | Tram | Détection `T1`, `T2` | Réseau 100 % bus, pictogramme unique |
 | Mode liste, état | Secondes | Minutes |
-| Dépendance | Aucune | `gtfs-realtime-bindings` (protobuf) |
+| Dépendance | Aucune | `gtfs-realtime-bindings==2.2.0` : la 3.0.0 exige protobuf 7 alors que Home Assistant épingle protobuf 6, son installation échouerait |
 
 ---
 
 ## 17. Limitations connues
+
+- **Version de `gtfs-realtime-bindings`** : épinglée à 2.2.0 parce que la 3.0.0 impose `protobuf>=7.34` et que Home Assistant contraint `protobuf==6.32`. À réévaluer quand Home Assistant passera à protobuf 7.
 
 - **Deux formats de version du GTFS** : `last_modified` de data.gouv.fr (`2026-09-02T11:39:50.120000+00:00`) et `updated` de transport.data.gouv.fr (`2026-09-02T11:39:50.120000Z`) désignent le même fichier avec deux écritures. Un basculement d'une source à l'autre provoque donc un rechargement inutile mais inoffensif du GTFS, au plus une fois par bascule.
 

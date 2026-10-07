@@ -1,0 +1,4 @@
+homeassistant
+home-assistant-frontend
+pytest-homeassistant-custom-component
+gtfs-realtime-bindings==2.2.0

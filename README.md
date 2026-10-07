@@ -44,7 +44,7 @@ Les horaires théoriques viennent du fichier GTFS du réseau (valable jusqu'en s
 
 | Élément | Détail |
 |---|---|
-| **Home Assistant** | Version 2024.6.0 ou plus récente |
+| **Home Assistant** | Version 2024.6.0 ou plus récente ; la dépendance `gtfs-realtime-bindings` 2.2.0 est installée automatiquement, compatible avec le protobuf fourni par Home Assistant |
 | **Accès Internet** | Vers transport.data.gouv.fr, data.gouv.fr et sim.133.prod.instant-system.com (infotrafic du site officiel) |
 | **Accès aux fichiers HA** | Via SSH, Samba, l'add-on File Editor ou HACS |
 
@@ -502,6 +502,16 @@ L'intégration lit toutes les 5 minutes la page `sim.133.prod.instant-system.com
 L'intégration vérifie toutes les 6 heures sur data.gouv.fr si une nouvelle version du GTFS a été publiée et la recharge automatiquement. Pour forcer la vérification, rechargez l'intégration ou redémarrez Home Assistant. L'attribut `gtfs_version` des capteurs indique la date du fichier en cours.
 
 ---
+
+## Publication HACS
+
+Le dépôt est prêt pour une installation en dépôt personnalisé HACS et contient ce qu'exige une future inclusion dans le catalogue par défaut :
+
+- `hacs.json` à la racine, `manifest.json` avec `domain`, `name`, `version`, `documentation`, `issue_tracker`, `codeowners`
+- Workflow `Validation` (hassfest et action HACS) à chaque push, chaque pull request et chaque lundi ; workflow `Tests` (pytest, syntaxe des cartes et des JSON)
+- README et TECHNICAL en français, icônes de marque dans `custom_components/grandole/brand/`
+
+Restent à faire côté GitHub avant de soumettre au catalogue : une description et des sujets (`home-assistant`, `hacs`, `custom-integration`, `gtfs`, `gtfs-realtime`, `dole`), une première release portant le même numéro que `manifest.json`, et une contribution de l'icône au dépôt `home-assistant/brands` (le workflow ignore cette vérification tant que ce n'est pas fait).
 
 ## Tests
 

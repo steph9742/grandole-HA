@@ -1,0 +1,41 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  pytest:
+    name: Pytest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - name: Installer les dépendances
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements_test.txt
+      - name: Lancer les tests
+        run: python -m pytest tests -q --asyncio-mode=auto -o asyncio_default_fixture_loop_scope=function
+
+  syntaxe:
+    name: Syntaxe des cartes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Vérifier les fichiers JS
+        run: |
+          node --check custom_components/grandole/lovelace/grandole-card.js
+          node --check custom_components/grandole/lovelace/grandole-card-editor.js
+      - name: Vérifier les fichiers JSON
+        run: |
+          python3 -c "import json,glob; [json.load(open(f)) for f in ['hacs.json','custom_components/grandole/manifest.json','custom_components/grandole/strings.json']+glob.glob('custom_components/grandole/translations/*.json')]; print('json ok')"

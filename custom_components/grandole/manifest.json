@@ -11,10 +11,10 @@
     "frontend"
   ],
   "documentation": "https://github.com/steph9742/grandole-ha",
-  "issue_tracker": "https://github.com/steph9742/grandole-ha/issues",
+  "integration_type": "service",
   "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/steph9742/grandole-ha/issues",
   "requirements": [
-    "gtfs-realtime-bindings>=1.0.0"
-  ],
-  "homeassistant": "2024.6.0"
+    "gtfs-realtime-bindings==2.2.0"
+  ]
 }
