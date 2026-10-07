@@ -1,0 +1,31 @@
+chercher_arret:
+  fields:
+    recherche:
+      required: true
+      example: "gare"
+      selector:
+        text:
+    limite:
+      required: false
+      default: 10
+      selector:
+        number:
+          min: 1
+          max: 50
+          mode: box
+
+get_horaires:
+  fields:
+    nom:
+      required: true
+      example: "Dole Gare"
+      selector:
+        text:
+    nb:
+      required: false
+      default: 3
+      selector:
+        number:
+          min: 1
+          max: 5
+          mode: slider

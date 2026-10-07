@@ -1,0 +1,165 @@
+{
+  "title": "Grandole Mobilités",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Monitoring mode",
+        "description": "**Stop by name**: every departure at a stop, all lines and directions combined.\n\n**Stop by line and direction**: a sensor dedicated to one line and one direction, with the minutes before the next bus as its state.\n\n**Nearby stops for a person**: the closest stops to a located entity and their next departures.\n\n**Line status**: traffic info from grandole-mobilites.fr, delays, cancelled trips and located vehicles for one line.\n\n**Vehicle positions**: real-time location of the buses on a line.\n\nOpen data (GTFS and GTFS-RT) is downloaded automatically, no key needed.",
+        "data": {
+          "mode": "Mode",
+          "name": "Entry name (optional)"
+        },
+        "data_description": {
+          "name": "Displayed in the integrations list. Leave empty for an automatic name."
+        }
+      },
+      "lieu": {
+        "title": "Stop by name",
+        "description": "Pick a stop of the Grandole Mobilités network. Partial names are accepted (e.g. \"gare\" for Dole Gare).",
+        "data": {
+          "nom": "Stop name",
+          "nb_passages": "Departures per line and direction"
+        },
+        "data_description": {
+          "nb_passages": "Between 1 and 5."
+        }
+      },
+      "liste": {
+        "title": "Stop by line and direction",
+        "description": "Pick the stop. The next step only offers the lines serving it.\n\nYou can add several stop / line / direction combinations in the same entry.",
+        "data": {
+          "nom": "Stop name",
+          "nb_passages": "Departures to retrieve"
+        },
+        "data_description": {
+          "nb_passages": "Only shown for the first combination, applies to all of them."
+        }
+      },
+      "liste_ligne": {
+        "title": "Choose the line",
+        "description": "{info}",
+        "data": {
+          "ligne": "Line"
+        }
+      },
+      "liste_sens": {
+        "title": "Choose the direction",
+        "description": "{info}",
+        "data": {
+          "sens": "Direction",
+          "add_another": "Add another combination after this one"
+        }
+      },
+      "person": {
+        "title": "Nearby stops for a person",
+        "description": "Select a located **person** entity. The sensor lists the stops within 1 km of their position, with their next departures.",
+        "data": {
+          "person_entity_id": "Person entity",
+          "nb_passages": "Departures per line and direction",
+          "max_stops": "Maximum number of stops"
+        },
+        "data_description": {
+          "person_entity_id": "Must be a `person` entity with a GPS position.",
+          "nb_passages": "Between 1 and 5 departures per line and direction at each stop.",
+          "max_stops": "Limits the number of returned stops (maximum 10)."
+        }
+      },
+      "ligne": {
+        "title": "Line status",
+        "description": "Select the line to monitor. The status combines the traffic info published on grandole-mobilites.fr (works, detours, upcoming disruptions) with real-time data: large delay, cancelled trip, skipped stop.",
+        "data": {
+          "id_ligne": "Line"
+        }
+      },
+      "suivi_ligne": {
+        "title": "Vehicle positions",
+        "description": "Select the line whose buses you want to track. GPS positions older than 5 minutes are ignored.",
+        "data": {
+          "id_ligne": "Line to track"
+        }
+      }
+    },
+    "error": {
+      "gtfs_indisponible": "Unable to load the GTFS timetable from transport.data.gouv.fr. Check the Internet connection and try again.",
+      "arret_inconnu": "No stop matches this name.",
+      "aucune_ligne": "No line serves this stop.",
+      "ligne_inconnue": "Unknown line."
+    },
+    "abort": {
+      "already_configured": "This configuration is already set up."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Edit configuration",
+        "description": "Change the number of displayed departures.",
+        "data": {
+          "nb_passages": "Departures per line and direction (1 to 5)",
+          "max_stops": "Maximum number of stops",
+          "add_item": "Add a stop / line / direction combination"
+        }
+      },
+      "add_item": {
+        "title": "Add a combination",
+        "description": "Pick the stop to add.",
+        "data": {
+          "nom": "Stop name"
+        }
+      },
+      "add_item_ligne": {
+        "title": "Choose the line",
+        "description": "{info}",
+        "data": {
+          "ligne": "Line"
+        }
+      },
+      "add_item_sens": {
+        "title": "Choose the direction",
+        "description": "{info}",
+        "data": {
+          "sens": "Direction",
+          "add_another": "Add another combination after this one"
+        }
+      }
+    },
+    "error": {
+      "gtfs_indisponible": "Unable to load the GTFS timetable. Try again later.",
+      "arret_inconnu": "No stop matches this name.",
+      "aucune_ligne": "No line serves this stop."
+    },
+    "abort": {
+      "aucune_option": "This entry has no editable option."
+    }
+  },
+  "services": {
+    "chercher_arret": {
+      "name": "Search a stop",
+      "description": "Searches Grandole Mobilités stops by name (accent- and case-insensitive). Returns the matching stops with their lines.",
+      "fields": {
+        "recherche": {
+          "name": "Search",
+          "description": "Text to look for in stop names (e.g. \"gare\")."
+        },
+        "limite": {
+          "name": "Limit",
+          "description": "Maximum number of results (1 to 50)."
+        }
+      }
+    },
+    "get_horaires": {
+      "name": "Stop departures",
+      "description": "Returns the next departures at a stop, whether it is tracked by a sensor or not.",
+      "fields": {
+        "nom": {
+          "name": "Stop",
+          "description": "Stop name (fuzzy match accepted)."
+        },
+        "nb": {
+          "name": "Departures",
+          "description": "Number of departures per line and direction (1 to 5)."
+        }
+      }
+    }
+  }
+}

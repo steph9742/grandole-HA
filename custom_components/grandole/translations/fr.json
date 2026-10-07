@@ -1,0 +1,165 @@
+{
+  "title": "Grandole Mobilités",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Mode de surveillance",
+        "description": "**Arrêt par nom** : tous les passages d'un arrêt, toutes lignes et directions confondues.\n\n**Arrêt par ligne et direction** : un capteur dédié à une ligne et un sens, avec les minutes avant le prochain bus comme état.\n\n**Arrêts proches d'une personne** : les arrêts les plus proches d'une entité géolocalisée et leurs prochains passages.\n\n**État d'une ligne** : infotrafic du site grandole-mobilites.fr, retards, courses annulées et véhicules localisés pour une ligne.\n\n**Positions des véhicules** : localisation en temps réel des bus d'une ligne.\n\nLes données ouvertes (GTFS et GTFS-RT) sont téléchargées automatiquement, sans clé.",
+        "data": {
+          "mode": "Mode",
+          "name": "Nom de cette entrée (optionnel)"
+        },
+        "data_description": {
+          "name": "Affiché dans la liste des intégrations. Laissez vide pour un nom automatique."
+        }
+      },
+      "lieu": {
+        "title": "Arrêt par nom",
+        "description": "Choisissez un arrêt du réseau Grandole Mobilités. Un nom partiel est accepté (ex. « gare » pour Dole Gare).",
+        "data": {
+          "nom": "Nom de l'arrêt",
+          "nb_passages": "Passages par ligne et direction"
+        },
+        "data_description": {
+          "nb_passages": "Entre 1 et 5."
+        }
+      },
+      "liste": {
+        "title": "Arrêt par ligne et direction",
+        "description": "Choisissez l'arrêt. L'étape suivante ne proposera que les lignes qui le desservent.\n\nVous pouvez ajouter plusieurs combinaisons arrêt / ligne / direction dans la même entrée.",
+        "data": {
+          "nom": "Nom de l'arrêt",
+          "nb_passages": "Passages à récupérer"
+        },
+        "data_description": {
+          "nb_passages": "Visible uniquement lors du premier ajout, s'applique à toutes les combinaisons."
+        }
+      },
+      "liste_ligne": {
+        "title": "Choisir la ligne",
+        "description": "{info}",
+        "data": {
+          "ligne": "Ligne"
+        }
+      },
+      "liste_sens": {
+        "title": "Choisir la direction",
+        "description": "{info}",
+        "data": {
+          "sens": "Direction",
+          "add_another": "Ajouter une autre combinaison après celle-ci"
+        }
+      },
+      "person": {
+        "title": "Arrêts proches d'une personne",
+        "description": "Sélectionnez une entité **person** géolocalisée. Le capteur listera les arrêts situés à moins de 1 km de sa position, avec leurs prochains passages.",
+        "data": {
+          "person_entity_id": "Entité personne",
+          "nb_passages": "Passages par ligne et direction",
+          "max_stops": "Nombre d'arrêts maximum"
+        },
+        "data_description": {
+          "person_entity_id": "Doit être une entité de domaine `person` avec une position GPS.",
+          "nb_passages": "Entre 1 et 5 passages par ligne et direction à chaque arrêt.",
+          "max_stops": "Limite le nombre d'arrêts retournés (maximum 10)."
+        }
+      },
+      "ligne": {
+        "title": "État d'une ligne",
+        "description": "Sélectionnez la ligne à surveiller. L'état combine l'infotrafic publié sur grandole-mobilites.fr (travaux, déviations, perturbations à venir) et le temps réel : retard important, course annulée, arrêt non desservi.",
+        "data": {
+          "id_ligne": "Ligne"
+        }
+      },
+      "suivi_ligne": {
+        "title": "Positions des véhicules",
+        "description": "Sélectionnez la ligne dont vous souhaitez suivre les bus. Les positions GPS de plus de 5 minutes sont ignorées.",
+        "data": {
+          "id_ligne": "Ligne à suivre"
+        }
+      }
+    },
+    "error": {
+      "gtfs_indisponible": "Impossible de charger les horaires GTFS depuis transport.data.gouv.fr. Vérifiez la connexion Internet puis réessayez.",
+      "arret_inconnu": "Aucun arrêt ne correspond à ce nom.",
+      "aucune_ligne": "Aucune ligne ne dessert cet arrêt.",
+      "ligne_inconnue": "Ligne inconnue."
+    },
+    "abort": {
+      "already_configured": "Cette configuration est déjà enregistrée."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Modifier la configuration",
+        "description": "Modifiez le nombre de passages affichés.",
+        "data": {
+          "nb_passages": "Passages par ligne et direction (1 à 5)",
+          "max_stops": "Nombre d'arrêts maximum",
+          "add_item": "Ajouter une combinaison arrêt / ligne / direction"
+        }
+      },
+      "add_item": {
+        "title": "Ajouter une combinaison",
+        "description": "Choisissez l'arrêt à ajouter.",
+        "data": {
+          "nom": "Nom de l'arrêt"
+        }
+      },
+      "add_item_ligne": {
+        "title": "Choisir la ligne",
+        "description": "{info}",
+        "data": {
+          "ligne": "Ligne"
+        }
+      },
+      "add_item_sens": {
+        "title": "Choisir la direction",
+        "description": "{info}",
+        "data": {
+          "sens": "Direction",
+          "add_another": "Ajouter une autre combinaison après celle-ci"
+        }
+      }
+    },
+    "error": {
+      "gtfs_indisponible": "Impossible de charger les horaires GTFS. Réessayez plus tard.",
+      "arret_inconnu": "Aucun arrêt ne correspond à ce nom.",
+      "aucune_ligne": "Aucune ligne ne dessert cet arrêt."
+    },
+    "abort": {
+      "aucune_option": "Cette entrée n'a pas d'option modifiable."
+    }
+  },
+  "services": {
+    "chercher_arret": {
+      "name": "Chercher un arrêt",
+      "description": "Recherche des arrêts Grandole Mobilités par nom (accents et casse ignorés). Renvoie la liste des arrêts correspondants avec leurs lignes.",
+      "fields": {
+        "recherche": {
+          "name": "Recherche",
+          "description": "Texte à chercher dans le nom des arrêts (ex. « gare »)."
+        },
+        "limite": {
+          "name": "Limite",
+          "description": "Nombre maximum de résultats (1 à 50)."
+        }
+      }
+    },
+    "get_horaires": {
+      "name": "Horaires d'un arrêt",
+      "description": "Renvoie les prochains passages à un arrêt, qu'il soit suivi par un capteur ou non.",
+      "fields": {
+        "nom": {
+          "name": "Arrêt",
+          "description": "Nom de l'arrêt (correspondance approximative acceptée)."
+        },
+        "nb": {
+          "name": "Passages",
+          "description": "Nombre de passages par ligne et direction (1 à 5)."
+        }
+      }
+    }
+  }
+}

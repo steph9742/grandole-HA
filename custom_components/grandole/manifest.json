@@ -1,0 +1,20 @@
+{
+  "domain": "grandole",
+  "name": "Grandole Mobilités",
+  "version": "1.0.0",
+  "codeowners": [
+    "@steph9742"
+  ],
+  "config_flow": true,
+  "dependencies": [
+    "http",
+    "frontend"
+  ],
+  "documentation": "https://github.com/steph9742/grandole-ha",
+  "issue_tracker": "https://github.com/steph9742/grandole-ha/issues",
+  "iot_class": "cloud_polling",
+  "requirements": [
+    "gtfs-realtime-bindings>=1.0.0"
+  ],
+  "homeassistant": "2024.6.0"
+}
