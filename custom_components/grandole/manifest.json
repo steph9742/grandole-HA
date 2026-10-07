@@ -1,7 +1,6 @@
 {
   "domain": "grandole",
   "name": "Grandole Mobilités",
-  "version": "1.0.0",
   "codeowners": [
     "@steph9742"
   ],
@@ -10,11 +9,12 @@
     "http",
     "frontend"
   ],
-  "documentation": "https://github.com/steph9742/grandole-ha",
+  "documentation": "https://github.com/steph9742/grandole-HA",
   "integration_type": "service",
   "iot_class": "cloud_polling",
-  "issue_tracker": "https://github.com/steph9742/grandole-ha/issues",
+  "issue_tracker": "https://github.com/steph9742/grandole-HA/issues",
   "requirements": [
     "gtfs-realtime-bindings==2.2.0"
-  ]
+  ],
+  "version": "1.0.0"
 }

@@ -7,6 +7,7 @@ from homeassistant.components.frontend import add_extra_js_url
 from homeassistant.components.http import StaticPathConfig
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.storage import Store
 from homeassistant.loader import async_get_integration
 
@@ -16,6 +17,7 @@ from .services import async_register_services
 
 _LOGGER = logging.getLogger(__name__)
 PLATFORMS = ["sensor"]
+CONFIG_SCHEMA = cv.config_entry_only_config_schema(DOMAIN)
 
 _CARD_URL = "/grandole_card"
 _CARD_FILES = ["grandole-card.js", "grandole-card-editor.js"]

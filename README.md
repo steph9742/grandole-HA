@@ -57,7 +57,7 @@ Aucune clé API n'est nécessaire.
 ### Méthode 1 : HACS (recommandée)
 
 1. Dans HACS, ouvrez le menu **⋮** (en haut à droite) puis **Dépôts personnalisés**
-2. Ajoutez l'URL du dépôt : `https://github.com/steph9742/grandole-ha`
+2. Ajoutez l'URL du dépôt : `https://github.com/steph9742/grandole-HA`
    avec la catégorie **Integration**
 3. Recherchez **« Grandole Mobilités »** dans HACS et cliquez sur **Télécharger**
 4. Redémarrez Home Assistant depuis **Paramètres → Système → Redémarrer**
@@ -524,7 +524,7 @@ python3 -m venv .venv && .venv/bin/pip install homeassistant pytest-homeassistan
 
 ## Licence
 
-Ce projet est une intégration communautaire non officielle, sans lien avec Grandole Mobilités ni la Communauté d'agglomération du Grand Dole. Les données proviennent du jeu ouvert « Réseau de transport du Grand Dole » publié sous licence ouverte sur data.gouv.fr. Utilisez cette intégration à vos propres risques.
+Code publié sous licence MIT (voir `LICENSE`). Ce projet est une intégration communautaire non officielle, sans lien avec Grandole Mobilités ni la Communauté d'agglomération du Grand Dole. Les données proviennent du jeu ouvert « Réseau de transport du Grand Dole » publié sous licence ouverte sur data.gouv.fr. Utilisez cette intégration à vos propres risques.
 
 ---
 
